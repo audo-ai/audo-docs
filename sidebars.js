@@ -1,6 +1,6 @@
 module.exports = {
   sidebar: {
-    Overview: ['index', 'details'],
+    Overview: ['index'],
     API: ['python-api', 'http-api']
   },
 };
