@@ -13,17 +13,17 @@ Using our Python API, we can remove noise from audio using the following:
 
 
 ```python
-from audoai import AudoClient
+from audoai.noise_removal import NoiseRemovalClient
 
-client = AudoClient(api_key='abc123')
-result = client.remove_noise('my-audio.wav')
+noise_removal = NoiseRemovalClient(api_key='abc123')
+result = noise_removal.process('my-audio.wav')
 result.save('cleaned-audio.wav')
 ```
 
-Note, this requires installing the `audoai` package on PyPI:
+Note, this requires installing the `audoai-noise-removal` package on PyPI:
 
 ```bash
-pip3 install audoai
+pip3 install audoai-noise-removal
 ```
 
 View more details in the [Python API](python-api) section.
