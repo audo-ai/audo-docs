@@ -5,9 +5,9 @@ title: HTTP API
 
 If we want to remove noise in a language other than Python, the basic process is as follows:
 
- - `POST /v1/remove-noise` with our audio file (authenticated with our API key)
- - `GET /v1/remove-noise/<job-id>/status` until we see `{"state": "succeeded", "processedUrl": "<processedUrl>"}`
- - `GET <processedUrl>` to download the processed audio file with noise removed
+- `POST /v1/remove-noise` with our audio file (authenticated with our API key)
+- `GET /v1/remove-noise/<job-id>/status` until we see `{"state": "succeeded", "processedUrl": "<processedUrl>"}`
+- `GET <processedUrl>` to download the processed audio file with noise removed
 
 Here is a complete example of how we do this using `curl` and `jq` (in Ubuntu, `sudo apt-get install -y curl jq`):
 
@@ -31,7 +31,7 @@ while [ "$state" != "succeeded" ]; do
 done
 
 # Download the processed audio file
-processedUrl=$(jq '.processedUrl' <<< $status)
+processedUrl=$(jq -r '.processedUrl' <<< $status)
 curl "$processedUrl" > "$OUTPUT_FILE_NAME"
 
 ```
