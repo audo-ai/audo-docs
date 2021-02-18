@@ -31,7 +31,7 @@ while [ "$state" != "succeeded" ]; do
 done
 
 # Download the processed audio file
-processedUrl=$(jq '.processedUrl' <<< $status)
+processedUrl=$(jq -r '.processedUrl' <<< $status)
 curl "$processedUrl" > "$OUTPUT_FILE_NAME"
 
 ```
