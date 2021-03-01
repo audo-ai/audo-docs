@@ -5,13 +5,13 @@ sidebar_label: Quickstart
 slug: /
 ---
 
-Our API consists of a simple HTTP API located at `https://api.audo.ai/v1/` that you can call to perform noise removal. The routes are as follows:
+Our noise removal API consists of a simple set of HTTP endpoints located under `https://api.audo.ai/v1/`. These endpoints are as follows:
 
  - `POST /remove-noise` with an audio file to obtain `<jobId>`
  - `GET /remove-noise/<jobId>/status` to check the status of the job and get `<processedPath>`
  - `GET /<processedPath>` to download the processed audio file with noise removed
 
-We'll cover these endpoints in more detail on the next page.
+We'll cover these in more detail on the next page.
 
 ## Getting an API key
 

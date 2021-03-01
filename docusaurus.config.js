@@ -23,8 +23,17 @@ module.exports = {
       },
       items: [
         {
-          to: '/',
-          activeBasePath: 'docs',
+          href: 'https://audo.ai',
+          label: 'Home',
+          position: 'left',
+        },
+        {
+          href: 'https://app.audo.ai',
+          label: 'Login',
+          position: 'left',
+        },
+        {
+          href: '#',
           label: 'Docs',
           position: 'left',
         },
