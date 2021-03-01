@@ -1,15 +1,9 @@
 ---
-id: http-api
-title: HTTP API
+id: bash-http-example
+title: Bash HTTP Example
 ---
 
-If we want to remove noise in a language other than Python, the basic process is as follows:
-
-- `POST /v1/remove-noise` with our audio file (authenticated with our API key)
-- `GET /v1/remove-noise/<job-id>/status` until we see `{"state": "succeeded", "processedUrl": "<processedUrl>"}`
-- `GET <processedUrl>` to download the processed audio file with noise removed
-
-Here is a complete example of how we do this using `curl` and `jq` (in Ubuntu, `sudo apt-get install -y curl jq`):
+The following is an example of interacting with the API using pure bash, curl, and jq:
 
 ```bash
 

@@ -102,8 +102,8 @@ curl -O https://api.audo.ai/v1/dl/artifacts/clean/audo_enhanced_d29940ad-feb8-41
 
 
 <div style={{display: 'inline'}}>
-  <h2 style={{display: 'inline', paddingRight: 10 }}>WEBSOCKET /remove-noise/&lt;jobId&gt;/ws </h2>
-  <div style={{color: "#bbbbbb", display: 'inline' }}><i>ws://api.audo.ai/v1/remove-noise/&lt;jobId&gt;/ws</i><br/></div>
+  <h2 style={{display: 'inline', paddingRight: 10 }}>WEBSOCKET /wss/remove-noise/&lt;jobId&gt;/status </h2>
+  <div style={{color: "#bbbbbb", display: 'inline' }}><i>ws://api.audo.ai/v1/wss/remove-noise/&lt;jobId&gt;/status</i><br/></div>
 </div>
 
 <div style={{height: 14}}></div>
@@ -138,7 +138,7 @@ Retrieve the status of a job in realtime without polling. This is a completely o
 Here is an example that uses [websocat](https://github.com/vi/websocat):
 ```bash
 JOB_ID=be1e2138-433d-4278-8a79-698dfbab9168
-websocat "https://api.audo.ai/v1/remove-noise/$JOB_ID/ws" -H "x-api-key: $AUDO_API_KEY"
+websocat "wss://api.audo.ai/v1/wss/remove-noise/$JOB_ID/status" -H "x-api-key: $AUDO_API_KEY"
 ```
 
 ```json
