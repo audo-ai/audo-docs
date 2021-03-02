@@ -12,14 +12,16 @@ title: Endpoints
 
 Submit an audio file to the API for noise removal.
 
- - Form data: `file=@path/to/file.wav`
- - Url params: `?outputExt=mp3`
+- Form data: `file=@path/to/file.wav`
+- Optional Url params:
+  - `outputExt` - used to define the extension of the output file. defaults to `.wav`
+  - `outputUrl` - Function like a webhook. If provided, we'll make a `PUT` request with your processed audio, to a pre-signed url on paltforms like AWS or GCP.
 
 Response:
 
 ```json
 {
-    "jobId": "string"
+  "jobId": "string"
 }
 ```
 
@@ -45,6 +47,12 @@ Convert between audio formats:
 curl -X POST "https://api.audo.ai/v1/remove-noise?outputExt=mp3" -F "file=@myaudio.ogg" -H "x-api-key: $AUDO_API_KEY"
 ```
 
+Webhook to a pre-signed URL:
+
+```bash
+curl -X POST "https://api.audo.ai/v1/remove-noise?outputUrl=s3://bucket_b/output_file.mp3" -F "file=@myaudio.mp3" -H "x-api-key: $AUDO_API_KEY"
+```
+
 See how to get the result from the job ID below.
 
 </p>
@@ -59,26 +67,28 @@ See how to get the result from the job ID below.
 
 Retrieve the status of a job. Response possibilities:
 
- ```json
- {"state": "queued", "jobsAhead": <number>}
- ```
- 
- ```json
- {"state": "in_progress", "percent": <number>}
- ```
+```json
+{"state": "queued", "jobsAhead": <number>}
+```
 
- ```json
- {"state": "succeeded", "processedPath": "<processedPath>"}
- ```
- ```json
- {"state": "failed", "reason": "<reason>"}
- ```
+```json
+{"state": "in_progress", "percent": <number>}
+```
+
+```json
+{ "state": "succeeded", "processedPath": "<processedPath>" }
+```
+
+```json
+{ "state": "failed", "reason": "<reason>" }
+```
 
 <details>
 <summary style={{paddingBottom: 10}}>Example</summary>
 <p>
 
 Here is an example:
+
 ```bash
 JOB_ID=be1e2138-433d-4278-8a79-698dfbab9168
 curl -X GET "https://api.audo.ai/v1/remove-noise/$JOB_ID/status" -H "x-api-key: $AUDO_API_KEY"
@@ -86,8 +96,8 @@ curl -X GET "https://api.audo.ai/v1/remove-noise/$JOB_ID/status" -H "x-api-key: 
 
 ```json
 {
-    "state": "succeeded",
-    "processedPath": "dl/artifacts/clean/audo_enhanced_d29940ad-feb8-4187-8b31-e5778ef9ad1c.mp3"
+  "state": "succeeded",
+  "processedPath": "dl/artifacts/clean/audo_enhanced_d29940ad-feb8-4187-8b31-e5778ef9ad1c.mp3"
 }
 ```
 
@@ -100,7 +110,6 @@ curl -O https://api.audo.ai/v1/dl/artifacts/clean/audo_enhanced_d29940ad-feb8-41
 </p>
 </details>
 
-
 <div style={{display: 'inline'}}>
   <h2 style={{display: 'inline', paddingRight: 10 }}>WEBSOCKET /wss/remove-noise/&lt;jobId&gt;/status </h2>
   <div style={{color: "#bbbbbb", display: 'inline' }}><i>ws://api.audo.ai/v1/wss/remove-noise/&lt;jobId&gt;/status</i><br/></div>
@@ -112,30 +121,30 @@ Retrieve the status of a job in realtime without polling. This is a completely o
 
 - Message format: Each message is a json encoded object in the exact same representation as the endpoint above:
 
+```json
+{"state": "queued", "jobsAhead": <number>}
+```
 
- ```json
- {"state": "queued", "jobsAhead": <number>}
- ```
- 
- ```json
- {"state": "in_progress", "percent": <number>}
- ```
+```json
+{"state": "in_progress", "percent": <number>}
+```
 
- ```json
- {"state": "succeeded", "processedPath": "<processedPath>"}
- ```
- ```json
- {"state": "failed", "reason": "<reason>"}
- ```
+```json
+{ "state": "succeeded", "processedPath": "<processedPath>" }
+```
 
+```json
+{ "state": "failed", "reason": "<reason>" }
+```
 
- - Finally, don't forget to include the authentication header when connecting via `x-api-key: $AUDO_API_KEY`.
+- Finally, don't forget to include the authentication header when connecting via `x-api-key: $AUDO_API_KEY`.
 
 <details>
 <summary style={{paddingBottom: 10}}>Example</summary>
 <p>
 
 Here is an example that uses [websocat](https://github.com/vi/websocat):
+
 ```bash
 JOB_ID=be1e2138-433d-4278-8a79-698dfbab9168
 websocat "wss://api.audo.ai/v1/wss/remove-noise/$JOB_ID/status" -H "x-api-key: $AUDO_API_KEY"
