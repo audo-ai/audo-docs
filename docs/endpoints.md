@@ -14,7 +14,7 @@ Submit an audio file to the API for noise removal.
 
 - Form data: `file=@path/to/file.wav`
 - Optional Url params:
-  - `outputExt` - used to define the extension of the output file. defaults to `.wav`
+  - `outputExt` - Used to define the extension of the output file.
   - `outputUrl` - Function like a webhook. If provided, we'll make a `PUT` request with your processed audio, to a pre-signed url on platforms like AWS or GCP.
 
 Response:
