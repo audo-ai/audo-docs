@@ -64,7 +64,7 @@ module.exports = {
           items: [
             {
               label: "Blog",
-              href: "https://blog.audo.ai/",
+              href: "https://audo.ai/blog",
             },
             {
               label: "GitHub",
