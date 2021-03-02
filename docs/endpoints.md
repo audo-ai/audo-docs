@@ -50,7 +50,7 @@ curl -X POST "https://api.audo.ai/v1/remove-noise?outputExt=mp3" -F "file=@myaud
 Webhook to a pre-signed URL:
 
 ```bash
-curl -X POST "https://api.audo.ai/v1/remove-noise?outputUrl=s3://bucket_b/output_file.mp3" -F "file=@myaudio.mp3" -H "x-api-key: $AUDO_API_KEY"
+curl -X POST "https://api.audo.ai/v1/remove-noise?outputUrl=https://s3.Region.amazonaws.com/bucket-name/enhanced_myaudio.mp3" -F "file=@myaudio.mp3" -H "x-api-key: $AUDO_API_KEY"
 ```
 
 See how to get the result from the job ID below.
