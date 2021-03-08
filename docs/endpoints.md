@@ -126,7 +126,7 @@ Retrieve the status of a job. Response possibilities:
 ```
 
 ```json
-{ "state": "succeeded", "outputPath": "<outputPath>" }
+{ "state": "succeeded", "downloadPath": "<downloadPath>" }
 ```
 
 ```json
@@ -147,7 +147,7 @@ curl -X GET "https://api.audo.ai/v1/remove-noise/$JOB_ID/status" -H "x-api-key: 
 ```json
 {
   "state": "succeeded",
-  "outputPath": "dl/artifacts/clean/audo_enhanced_d29940ad-feb8-4187-8b31-e5778ef9ad1c.mp3"
+  "downloadPath": "dl/artifacts/clean/audo_enhanced_d29940ad-feb8-4187-8b31-e5778ef9ad1c.mp3"
 }
 ```
 
@@ -180,7 +180,7 @@ Retrieve the status of a job in realtime without polling. This is a completely o
 ```
 
 ```json
-{ "state": "succeeded", "outputPath": "<outputPath>" }
+{ "state": "succeeded", "downloadPath": "<downloadPath>" }
 ```
 
 ```json
@@ -209,7 +209,7 @@ websocat "wss://api.audo.ai/v1/wss/remove-noise/$JOB_ID/status" -H "x-api-key: $
 {"state": "in_progress", "percent": 95}
 {"state": "in_progress", "percent": 98}
 {"state": "in_progress", "percent": 100}
-{"state": "succeeded", "outputPath": "dl/artifacts/clean/audo_enhanced_7c9e10b3-96ca-4904-aecf-ce815339c859.wav"}
+{"state": "succeeded", "downloadPath": "dl/artifacts/clean/audo_enhanced_7c9e10b3-96ca-4904-aecf-ce815339c859.wav"}
 ```
 
 So, same as before, we can now download our file by prepending `https://api.audo.ai/v1/`:

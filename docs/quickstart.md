@@ -9,8 +9,8 @@ Our noise removal API consists of a simple set of HTTP endpoints located under `
 
  - `POST /upload` with an audio file to obtain `<fileId>`
  - `POST /remove-noise` with `<fileId>` to obtain `<jobId>`
- - `GET /remove-noise/<jobId>/status` to check the status of the job and get `<outputPath>`
- - `GET /<outputPath>` to download the processed audio file with noise removed
+ - `GET /remove-noise/<jobId>/status` to check the status of the job and get `<downloadPath>`
+ - `GET /<downloadPath>` to download the processed audio file with noise removed
 
 We'll cover these in more detail on the next page.
 
