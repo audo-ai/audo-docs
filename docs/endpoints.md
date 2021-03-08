@@ -112,6 +112,10 @@ See how to get the result from the job ID below.
 Retrieve the status of a job. Response possibilities:
 
 ```json
+{ "state": "downloading" }  // Only if input is from a URL
+```
+
+```json
 { "state": "queued", "jobsAhead": <number> }
 ```
 
@@ -164,6 +168,10 @@ curl -O https://api.audo.ai/v1/dl/artifacts/clean/audo_enhanced_d29940ad-feb8-41
 Retrieve the status of a job in realtime without polling. This is a completely optional alternative method to find the status of a job.
 
 - Message format: Each message is a json encoded object in the exact same representation as the endpoint above:
+
+```json
+{ "state": "downloading" }  // Only if input is from a URL
+```
 
 ```json
 { "state": "queued", "jobsAhead": <number> }
