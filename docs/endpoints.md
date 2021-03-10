@@ -89,15 +89,67 @@ url=https://dl5.webmfiles.org/big-buck-bunny_trailer.webm
 curl -X POST "$BACKEND_URL/remove-noise" -d '{"input": "'$url'", "outputExtension": "mp4"}' -H "x-api-key: $AUDO_API_KEY" -H "x-api-key: $AUDO_API_KEY"
 ```
 
-Remove noise from audio within S3 using presigned URLs:
+Remove noise from audio within S3 using presigned URLs (see note below):
 
 ```bash
-input=https://bucket.s3.zone.amazonaws.com/89...6b/example/input.wav?X-Amz-Algorithm=AWS4...
-output=https://bucket.s3.zone.amazonaws.com/89...6b/example/output.mp3?X-Amz-Algorithm=AWS4...
-curl -X POST "https://api.audo.ai/v1/remove-noise" '{"input": "'$input'", "output": "'$output'"}' -H "x-api-key: $AUDO_API_KEY"
+input=https://bucket.s3.amazonaws.com/foo.webm?AWSAccessKeyId=ABC&Signature=PxM%3D&Expires=1615338399
+output=https://bucket.s3.amazonaws.com/audo-enhanced_foo.mp4?AWSAccessKeyId=ABC&Signature=e8O%3D&content-type=video%2Fmp4&Expires=1615340231
+curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"input": "'$input'", "output": "'$output'"}' -H "x-api-key: $AUDO_API_KEY"
 ```
 
-See how to get the result from the job ID below.
+Note: The output must be a `PUT` presigned URL with the `ContentType` set to your output format (ie. `video/mp4`). 
+
+<details>
+<summary style={{paddingBottom: 20}}>Python Full S3 Example</summary>
+<p>
+
+First, make sure to have dependencies installed (make sure to upgrade `audoai-noise-removal`):
+```console
+pip3 install --upgrade audoai-noise-removal boto3
+# Configure aws with `aws configure`
+```
+
+Then, we can use this example script to generate the presigned URLs and remove noise:
+
+```python
+bucket = 'my-bucket'
+s3_input_file = 'my-input.webm'
+s3_output_file = 'my-noise-removed-output.mp4'
+output_content_type = 'video/mp4'
+audo_api_key = 'MY-AUDO-API-KEY'
+
+# Generate Presigned URLs
+import boto3
+s3_client = boto3.client('s3')
+input_url = s3_client.generate_presigned_url(
+  'get_object',
+  Params={'Bucket': bucket, 'Key': s3_input_file}
+)
+output_url = s3_client.generate_presigned_url(
+  'put_object',
+  Params={
+  'Bucket': bucket,
+  'Key': s3_output_file,
+  'ContentType': output_content_type
+  },
+  HttpMethod='PUT'
+)
+
+# Remove Noise
+from time import sleep
+from audoai.noise_removal import NoiseRemovalClient
+
+noise_removal = NoiseRemovalClient(api_key=audo_api_key)
+job_id = noise_removal.create_job(input=input_url, output=output_url)
+noise_removal.wait_for_job_id(job_id)
+
+print('Noise removal complete. Waiting for upload...')
+sleep(2.0)
+print('Final result:', noise_removal.get_status(job_id))
+```
+
+</p>
+</details>
 
 </p>
 </details>
