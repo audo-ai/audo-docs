@@ -9,6 +9,9 @@ module.exports = {
   organizationName: "audo-ai",
   projectName: "audo-docs",
   themeConfig: {
+    prism: {
+      theme: require('prism-react-renderer/themes/vsDark'),
+    },
     colorMode: {
       defaultMode: "dark",
       disableSwitch: true,
