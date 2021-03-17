@@ -56,7 +56,8 @@ Submit an input to the API for noise removal.
 {
   "input": "<fileId>" | "<inputUrl>",  // File ID from /upload or URL to download from
   "outputExtension": "<extension>",  // [Optional] Output file extension (ie. 'mp3')
-  "output": "<outputUrl>"  // [Optional] Url to perform a PUT request with the output
+  "output": "<outputUrl>",  // [Optional] Url to perform a PUT request with the output
+  "noiseReductionAmount": "<int>" // [Optional] Amount of noise reduction. 100 = full reduction (default), 1 = almost no noise reduction
 }
  ```
 
@@ -82,6 +83,13 @@ curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"fileId": "'$FILE_ID'"}'
 {"jobId": "45d08ed2-84e6-4f1e-a6f3-2ddbf3c7d8a3"}
 ```
 
+
+Reduce noise by 90% using `fileId` from `/upload`:
+```bash
+FILE_ID=1b985607-045f-46b4-b8b0-c037592dd10e
+curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"fileId": "'$FILE_ID'", "noiseReductionAmount": "90"}' -H "x-api-key: $AUDO_API_KEY"
+```
+
 Remove noise from a remote video:
 
 ```bash
@@ -99,6 +107,7 @@ input=https://bucket.s3.amazonaws.com/foo.webm?AWSAccessKeyId=ABC&Signature=PxM%
 output=https://bucket.s3.amazonaws.com/audo-enhanced_foo.mp4?AWSAccessKeyId=ABC&Signature=e8O%3D&content-type=video%2Fmp4&Expires=1615340231
 curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"input": "'$input'", "output": "'$output'"}' -H "x-api-key: $AUDO_API_KEY"
 ```
+
 
 </p>
 </details>
