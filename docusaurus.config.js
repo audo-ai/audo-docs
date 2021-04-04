@@ -18,10 +18,10 @@ module.exports = {
       respectPrefersColorScheme: false,
     },
     navbar: {
-      title: "Audo AI",
+      title: undefined,
       logo: {
         alt: "Audo AI Logo",
-        src: "img/logo.svg",
+        src: "img/text-logo.svg",
         href: "/",
       },
       items: [
