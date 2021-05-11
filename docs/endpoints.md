@@ -77,7 +77,7 @@ Using `fileId` from `/upload`:
 
 ```bash
 FILE_ID=1b985607-045f-46b4-b8b0-c037592dd10e
-curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"fileId": "'$FILE_ID'"}' -H "x-api-key: $AUDO_API_KEY"
+curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"input": "'$FILE_ID'"}' -H "x-api-key: $AUDO_API_KEY"
 ```
 ```
 {"jobId": "45d08ed2-84e6-4f1e-a6f3-2ddbf3c7d8a3"}
@@ -87,7 +87,7 @@ curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"fileId": "'$FILE_ID'"}'
 Reduce noise by 90% using `fileId` from `/upload`:
 ```bash
 FILE_ID=1b985607-045f-46b4-b8b0-c037592dd10e
-curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"fileId": "'$FILE_ID'", "noiseReductionAmount": "90"}' -H "x-api-key: $AUDO_API_KEY"
+curl -X POST "https://api.audo.ai/v1/remove-noise" -d '{"input": "'$FILE_ID'", "noiseReductionAmount": "90"}' -H "x-api-key: $AUDO_API_KEY"
 ```
 
 Remove noise from a remote video:
