@@ -94,7 +94,7 @@ Remove noise from a remote video:
 
 ```bash
 url=https://dl5.webmfiles.org/big-buck-bunny_trailer.webm
-curl -X POST "$BACKEND_URL/remove-noise" -d '{"input": "'$url'", "outputExtension": "mp4"}' -H "x-api-key: $AUDO_API_KEY" -H "x-api-key: $AUDO_API_KEY"
+curl -X POST "$BACKEND_URL/remove-noise" -d '{"input": "'$url'", "outputExtension": "mp4"}' -H "x-api-key: $AUDO_API_KEY" -H
 ```
 
 Remove noise from audio within S3 using presigned URLs ([read more here](/processing-from-s3)):
