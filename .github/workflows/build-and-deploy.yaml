@@ -3,23 +3,28 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: write
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.1
-      
-      - name: Setup Yarn
-        uses: actions/setup-node@v2
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          # Docusaurus 2.0.0-alpha.72 (webpack 4, postcss 8.2) doesn't build on Node 17+.
+          node-version: 16
 
       - name: Install and Build
         run: |
-          yarn install
+          yarn install --frozen-lockfile
           yarn build
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.0.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: build
