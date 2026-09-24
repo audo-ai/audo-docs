@@ -1,7 +1,7 @@
 module.exports = {
   title: "Audo AI",
   tagline: "An API to Remove Background Noise and Enhance Speech",
-  url: "https://audo.ai",
+  url: "https://docs.audo.ai",
   baseUrl: "/",
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "warn",
@@ -89,6 +89,10 @@ module.exports = {
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
+        },
+        sitemap: {
+          // GitHub Pages serves /python-api/, not /python-api.
+          trailingSlash: true,
         },
       },
     ],
